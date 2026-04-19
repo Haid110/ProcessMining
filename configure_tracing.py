@@ -2,7 +2,7 @@
 import logging
 from opentelemetry import trace
 from opentelemetry.sdk.trace import TracerProvider
-from opentelemetry.sdk.trace.export import BatchSpanProcessor, ConsoleSpanExporter
+from opentelemetry.sdk.trace.export import SimpleSpanProcessor,BatchSpanProcessor, ConsoleSpanExporter
 # from opentelemetry.exporter.otlp.proto.grpc.trace_exporter import OTLPSpanExporter
 # from opentelemetry.sdk.resources import Resource
 
@@ -13,11 +13,17 @@ except (ImportError, ModuleNotFoundError, AttributeError):
 
 
 def setup_tracing(service_name: str = "mistral-service") -> trace.Tracer:
-    # 1. Setup the Provider
+
+    # 1. Open a file for writing
+    log_file = open("traces.json", "a")
+
+    # Setup the Provider
     provider = TracerProvider()
     
-    # 2. Setup the Exporter (Sending to Console for now)
-    processor = BatchSpanProcessor(ConsoleSpanExporter())
+    # 2. Configure the exporter to write to that file
+    # Note: This outputs one JSON object per line (JSONL format)
+    # Setup the Exporter (Sending to Console for now)
+    processor = BatchSpanProcessor(ConsoleSpanExporter(out=None)) # Or out=log_file
     provider.add_span_processor(processor)
     
     # 3. Set the global default tracer provider
@@ -31,6 +37,12 @@ def setup_tracing(service_name: str = "mistral-service") -> trace.Tracer:
             logging.warning("Mistral instrumentation failed: %s", exc)
     else:
         logging.warning("Mistral instrumentation package not installed; skipping instrumentation")
+
+    provider.shutdown() 
+
+    # Close the file at the end
+    log_file.close()
+
 
     return trace.get_tracer(service_name)
 
