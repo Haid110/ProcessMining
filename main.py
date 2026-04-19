@@ -18,7 +18,8 @@ def main():
     ]
 
     # Make the traced LLM call
-    result = traced_chat_completion(messages, model="mistral-large-latest", temperature=0.3)
+    # result = traced_chat_completion(messages, model="mistral-large-latest", temperature=0.3)
+    result = traced_chat_completion("mistral-tiny", [{"role": "user", "content": "Hello"}])
     print(result)
 
     # Flush remaining spans before exit
