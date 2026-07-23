@@ -13,6 +13,8 @@ Can OpenTelemetry spans produced during GenAI coding sessions be meaningfully
 converted into XES event logs and analysed with process mining algorithms to
 reveal interaction patterns, bottlenecks, and conformance violations?
 
+Ans: Yes it can be. I captured events successfully using OpenTelemetry and converted them into XES format in order to run process mining tool ProM. Using this tool, I produced different models with the help of Inductive miner and Heauristic miner. They revealed process flows, patterns and bottlenecks in their respective visualizations. 
+
 ---
 
 ## Pipeline Overview
