@@ -152,17 +152,17 @@ pip install -r requirements.txt
 
 **Windows (Command Prompt):**
 ```cmd
-set MISTRAL_API_KEY=5MNQbzChjDP1VkMhzcQ1Pf49Y3JDoBCx
+set MISTRAL_API_KEY=API KEY
 ```
 
 **Windows (PowerShell):**
 ```powershell
-$env:MISTRAL_API_KEY="5MNQbzChjDP1VkMhzcQ1Pf49Y3JDoBCx"
+$env:MISTRAL_API_KEY="API KEY
 ```
 
 **macOS / Linux:**
 ```bash
-export MISTRAL_API_KEY=5MNQbzChjDP1VkMhzcQ1Pf49Y3JDoBCx
+export MISTRAL_API_KEY=API KEY
 ```
 
 > Get a free API key at [console.mistral.ai](https://console.mistral.ai).
